@@ -28,46 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(84, 117);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Dibujar";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            pictureBox1 = new PictureBox();
+            buttonClear = new Button();
+            buttonSave = new Button();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(257, 52);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(246, 244);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
+            pictureBox1.BackColor = SystemColors.ButtonHighlight;
+            pictureBox1.Location = new Point(294, 69);
+            pictureBox1.Margin = new Padding(3, 4, 3, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(281, 141);
+            pictureBox1.TabIndex = 1;
+            pictureBox1.TabStop = false;
+            pictureBox1.MouseDown += PictureBox1_MouseDown;
+            pictureBox1.MouseMove += PictureBox1_MouseMove;
+            pictureBox1.MouseUp += PictureBox1_MouseUp;
+            // 
+            // buttonClear
+            // 
+            buttonClear.Location = new Point(186, 69);
+            buttonClear.Margin = new Padding(3, 4, 3, 4);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(86, 31);
+            buttonClear.TabIndex = 2;
+            buttonClear.Text = "Borrar";
+            buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += ButtonClear_Click;
+            // 
+            // buttonSave
+            // 
+            buttonSave.Location = new Point(75, 69);
+            buttonSave.Margin = new Padding(3, 4, 3, 4);
+            buttonSave.Name = "buttonSave";
+            buttonSave.Size = new Size(86, 31);
+            buttonSave.TabIndex = 3;
+            buttonSave.Text = "Guardar";
+            buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += ButtonSave_Click;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "Firma";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(648, 271);
+            Controls.Add(buttonSave);
+            Controls.Add(buttonClear);
+            Controls.Add(pictureBox1);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "Form1";
+            Text = "Firma";
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion
-
-        private Button button1;
         private PictureBox pictureBox1;
+        private Button buttonClear;
+        private Button buttonSave;
     }
 }
