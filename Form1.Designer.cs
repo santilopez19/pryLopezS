@@ -56,7 +56,6 @@
             buttonClear.TabIndex = 2;
             buttonClear.Text = "Borrar";
             buttonClear.UseVisualStyleBackColor = true;
-            buttonClear.Click += ButtonClear_Click;
             // 
             // buttonSave
             // 
