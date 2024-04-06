@@ -36,9 +36,11 @@
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = Properties.Resources.pngegg;
             pictureBox1.Location = new Point(247, 392);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(160, 116);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             pictureBox1.Click += Form1_Load;

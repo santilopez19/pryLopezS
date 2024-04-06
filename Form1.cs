@@ -10,8 +10,6 @@ namespace pryLopezS
         }
         public void Form1_Load(object sender, EventArgs e)
         {
-            // Dibuja la nave apenas se carga el formulario
-            DrawPlayer(pictureBox1.CreateGraphics());
         }
         private void PictureBox1_Paint(object sender, PaintEventArgs e)
         {
