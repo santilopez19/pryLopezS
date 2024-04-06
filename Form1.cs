@@ -68,13 +68,34 @@ namespace pryLopezS
         }
         private void ButtonSave_Click(object sender, EventArgs e)
         {
+            // Obtener la fecha y hora actual
+            DateTime now = DateTime.Now;
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-            saveFileDialog1.Filter = "Archivo de imagen (*.png)|*.png";
-            saveFileDialog1.Title = "Guardar imagen como";
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            // Crear el nombre de archivo usando la fecha y hora actual
+            string fileName = $"{now:yyyyMMdd_HHmmss}.png"; // Puedes cambiar la extensión según el tipo de imagen
+
+            // Directorio donde se guardarán las imágenes
+            string directoryPath = @"C:\FIRMAS"; // Reemplaza con la ruta de tu carpeta
+
+            // Comprobar si el directorio existe, si no, crearlo
+            if (!Directory.Exists(directoryPath))
             {
-                drawingBitmap.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            // Combinar el directorio con el nombre de archivo para obtener la ruta completa
+            string fullPath = Path.Combine(directoryPath, fileName);
+
+            try
+            {
+                // Guardar la imagen (asumiendo que tienes un objeto de imagen llamado 'drawingBitmap' por ejemplo)
+                drawingBitmap.Save(fullPath, System.Drawing.Imaging.ImageFormat.Png);
+
+                MessageBox.Show("La imagen se ha guardado correctamente en la carpeta 'FIRMAS'.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al guardar la imagen: {ex.Message}");
             }
         }
 
