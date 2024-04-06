@@ -1,6 +1,7 @@
 
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
+using System.Drawing;
 using System.Runtime.InteropServices;
 
 namespace pryLopezS
@@ -10,26 +11,21 @@ namespace pryLopezS
 
         private Point previousPoint;
         private List<Point> points = new List<Point>();
-        private bool drawing = false;
         private bool isDrawing = false;
         private List<List<Point>> drawings = new List<List<Point>>();
         private List<Point> currentDrawing = new List<Point>();
         private Bitmap drawingBitmap;
+        private Bitmap bitmap; // Bitmap utilizado para dibujar en el PictureBox
+        private Graphics graphics; // Objeto Graphics para dibujar en el Bitmap
 
         public Form1()
         {
             InitializeComponent();
             InitializeDrawing();
-            pictureBox1.MouseDown += PictureBox1_MouseDown;
-            pictureBox1.MouseMove += PictureBox1_MouseMove;
-            pictureBox1.MouseUp += PictureBox1_MouseUp;
-            pictureBox1.Paint += PictureBox1_Paint;
-            buttonSave.Click += ButtonSave_Click;
         }
         private void PictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Iniciar el dibujo y registrar el primer punto
-            drawing = true;
             points.Add(e.Location);
             isDrawing = true;
             previousPoint = e.Location;
@@ -43,7 +39,7 @@ namespace pryLopezS
         public void PictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // Si se está dibujando, registrar el punto actual
-            if (drawing)
+            if (isDrawing)
             {
                 using (Graphics g = Graphics.FromImage(drawingBitmap))
                 {
@@ -59,7 +55,6 @@ namespace pryLopezS
         private void PictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             // Finalizar el dibujo
-            drawing = false;
             isDrawing = false;
         }
 
@@ -84,10 +79,16 @@ namespace pryLopezS
         }
 
 
-        private void ButtonClear_Click(object sender, EventArgs e, PictureBox pictureBox1)
+
+        private void buttonClear_Click(object sender, EventArgs e)
         {
-            Graphics g = Graphics.FromImage(this.pictureBox1.Image);
-            g.Clear(this.pictureBox1.BackColor);
+
+            // Borra el dibujo actual creando un nuevo Bitmap y asignándolo al PictureBox
+            bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height); // Crea un nuevo Bitmap vacío
+            graphics = Graphics.FromImage(bitmap); // Inicializa el objeto Graphics con el nuevo Bitmap
+            graphics.Clear(Color.White); // Limpia el bitmap con un color de fondo blanco
+            pictureBox1.Image = bitmap; // Asigna el nuevo Bitmap al PictureBox
+            InitializeDrawing();
         }
     }
 }
