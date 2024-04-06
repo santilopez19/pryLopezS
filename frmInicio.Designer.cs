@@ -1,6 +1,6 @@
 ﻿namespace pryLopezS
 {
-    partial class Inicio
+    partial class frmInicio
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Inicio));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmInicio));
             pictureBox1 = new PictureBox();
             lblStart = new Label();
             timer1 = new System.Windows.Forms.Timer(components);

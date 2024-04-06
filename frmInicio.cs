@@ -12,12 +12,13 @@ using static System.Windows.Forms.DataFormats;
 
 namespace pryLopezS
 {
-    public partial class Inicio : Form
+    public partial class frmInicio : Form
     {
 
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private bool labelVisible = true;
-        public Inicio()
+
+        public frmInicio()
         {
             InitializeComponent();
 
@@ -25,6 +26,8 @@ namespace pryLopezS
             timer.Interval = 700; // Intervalo en milisegundos (0.7 segundos)
             timer.Tick += Timer_Tick;
             timer.Start(); // Iniciar el Timer
+
+
         }
         private void Timer_Tick(object sender, EventArgs e)
         {

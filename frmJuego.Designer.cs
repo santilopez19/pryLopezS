@@ -29,22 +29,21 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Galaga));
-            pictureBox1 = new PictureBox();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            nave = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)nave).BeginInit();
             SuspendLayout();
             // 
-            // pictureBox1
+            // nave
             // 
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.Image = Properties.Resources.pngegg;
-            pictureBox1.Location = new Point(247, 392);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(160, 116);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += Form1_Load;
-            pictureBox1.Paint += PictureBox1_Paint;
+            nave.BackColor = Color.Transparent;
+            nave.Image = Properties.Resources.pngegg;
+            nave.Location = new Point(303, 434);
+            nave.Name = "nave";
+            nave.Size = new Size(122, 83);
+            nave.SizeMode = PictureBoxSizeMode.Zoom;
+            nave.TabIndex = 0;
+            nave.TabStop = false;
+            nave.Click += Form1_Load;
             // 
             // Galaga
             // 
@@ -52,20 +51,22 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.MidnightBlue;
             BackgroundImage = Properties.Resources.star_fall;
-            ClientSize = new Size(676, 520);
-            Controls.Add(pictureBox1);
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(720, 525);
+            Controls.Add(nave);
+            Enabled = false;
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Galaga";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Galaga";
             Click += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nave).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private PictureBox pictureBox1;
+        private PictureBox nave;
     }
 }
