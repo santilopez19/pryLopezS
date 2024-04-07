@@ -4,30 +4,34 @@ namespace pryLopezS
 {
     public partial class Galaga : Form
     {
-        private int pictureBoxSpeed = 10; // Velocidad de movimiento del PictureBox
-        //ball
+        // Velocidad de movimiento de la nave
+        private int pictureBoxSpeed = 10;
+        //bala
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-        private PictureBox ball = new PictureBox();
-
-        private int ballSpeed = 10;
+        private int velocidadBala = 10;
+        private PictureBox bala;
 
         public Galaga()
         {   
             InitializeComponent();
-            // Configurar el PictureBox
+            // Configurar el Nave
             nave.BackColor = System.Drawing.Color.Transparent;
             nave.Size = new System.Drawing.Size(50, 50);
             nave.Location = new System.Drawing.Point(320, 420);
             this.Controls.Add(nave);
 
+
             // Suscribirse a los eventos KeyDown y KeyUp
             this.KeyDown += Movernave_KeyDown;
             this.KeyUp += Form1_KeyUp;
 
-            ball.KeyDown += Tirarbola_KeyDown; // Suscribirse al evento KeyDown de pictureBox1
             // Configurar el Timer
             timer.Interval = 10; // Intervalo en milisegundos
-            timer.Tick += Timer_Tick;
+
+            //bala
+
+            KeyPreview = true;
+            KeyDown += bala_KeyDown;
         }
         public void Form1_Load(object sender, EventArgs e)
         {
@@ -49,33 +53,35 @@ namespace pryLopezS
             // Restablecer la velocidad de movimiento cuando se suelta la tecla
             nave.Left += 0;
         }
-        private void Tirarbola_KeyDown(object sender, KeyEventArgs e)
+        private void bala_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Space)
             {
-                // Crear una nueva bola
-                PictureBox ball = new PictureBox(); // Crear un nuevo PictureBox local
-                ball.BackColor = Color.White;
-                ball.Size = new Size(10, 10);
-                ball.Location = new Point(ball.Location.X + ball.Width / 2 - ball.Width / 2, ball.Location.Y - ball.Height);
-                this.Controls.Add(ball);
+                // Crea la bala
+                bala = new PictureBox();
+                bala.Image = Properties.Resources.bala; // Asigna la imagen de la bala
+                bala.BackColor = System.Drawing.Color.Transparent;
+                bala.Size = new Size(10, 20);
+                bala.SizeMode = PictureBoxSizeMode.StretchImage;
+                // Establecer la posición inicial de la bala en la misma posición que la nave
+                bala.Location = new Point(nave.Location.X + nave.Width / 2 - bala.Width / 2, nave.Location.Y);
 
-                // Iniciar el Timer para mover la bola
-                timer.Start();
-            }
-        }
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            // Obtener la bola creada en PictureBox1_KeyDown
-            PictureBox ball = (PictureBox)this.Controls[this.Controls.Count - 1];
-            // Mover la bola en línea recta hacia arriba
-            ball.Top -= ballSpeed;
+                // Agregar el PictureBox al formulario
+                Controls.Add(bala);
 
-            // Si la bola sale del formulario, detener el Timer y eliminar la bola
-            if (ball.Top + ball.Height < 0)
-            {
-                timer.Stop();
-                this.Controls.Remove(ball);
+                // Inicia la animación de la bala
+                timer.Tick += (sender, e) =>
+                {
+                    bala.Top -= velocidadBala; // Mueve la bala hacia arriba
+
+                    // Si la bala sale de la pantalla, se detiene y se elimina
+                    if (bala.Top + bala.Height < 0)
+                    {
+                        timer.Tick -= (EventHandler)sender;
+                        Controls.Remove(bala);
+                        bala.Dispose();
+                    }
+                };
             }
         }
     }
