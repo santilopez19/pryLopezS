@@ -36,7 +36,7 @@
             // nave
             // 
             nave.BackColor = Color.Transparent;
-            nave.Image = Properties.Resources.pngegg;
+            nave.Image = (Image)resources.GetObject("nave.Image");
             nave.Location = new Point(303, 434);
             nave.Name = "nave";
             nave.Size = new Size(122, 83);

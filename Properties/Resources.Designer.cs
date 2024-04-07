@@ -73,9 +73,20 @@ namespace pryLopezS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap pngegg {
+        internal static System.Drawing.Bitmap kisspng_space_invaders_tetris_video_game_arcade_game_space_invader_5b28a3e3d122c8_7105363315293900518566_removebg_preview {
             get {
-                object obj = ResourceManager.GetObject("pngegg", resourceCulture);
+                object obj = ResourceManager.GetObject("kisspng_space_invaders_tetris_video_game_arcade_game_space_invader_5b28a3e3d122c8" +
+                        "_7105363315293900518566_removebg_preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap naveEnemiga1 {
+            get {
+                object obj = ResourceManager.GetObject("naveEnemiga1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

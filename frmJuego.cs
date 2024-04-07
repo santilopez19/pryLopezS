@@ -1,15 +1,25 @@
 using System.Windows.Forms;
 using System.Drawing;
+using System.Collections.Generic;
+using System;
+using static System.Windows.Forms.DataFormats;
+using pryProyectoNave;
 namespace pryLopezS
 {
     public partial class Galaga : Form
     {
         // Velocidad de movimiento de la nave
         private int pictureBoxSpeed = 10;
-        //bala
-        private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
-        private int velocidadBala = 10;
-        private PictureBox bala;
+
+
+        //Nave Enemiga
+        public static Galaga Instance { get; private set; }
+        private List<NaveEnemiga> navesEnemigas;
+
+        //Bala
+
+
+
 
         public Galaga()
         {   
@@ -25,18 +35,21 @@ namespace pryLopezS
             this.KeyDown += Movernave_KeyDown;
             this.KeyUp += Form1_KeyUp;
 
-            // Configurar el Timer
-            timer.Interval = 10; // Intervalo en milisegundos
 
-            //bala
 
-            KeyPreview = true;
-            this.KeyDown += bala_KeyDown;
+            ///Naves Enemigas
+            Instance = this;
+            InicializarNavesEnemigas();
+
         }
         public void Form1_Load(object sender, EventArgs e)
         {
         }
-        private void Movernave_KeyDown(object sender, KeyEventArgs e)
+
+
+
+        //Nave
+        public void Movernave_KeyDown(object sender, KeyEventArgs e)
         {
             // Detectar las teclas presionadas y mover el PictureBox
             if (e.KeyCode == Keys.Left && nave.Left > 0)
@@ -48,40 +61,36 @@ namespace pryLopezS
                 nave.Left += pictureBoxSpeed; // Mover hacia la derecha
             }
         }
-        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        public void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             // Restablecer la velocidad de movimiento cuando se suelta la tecla
             nave.Left += 0;
         }
-        private void bala_KeyDown(object sender, KeyEventArgs e)
+        //Nave Enemiga
+
+        private void InicializarNavesEnemigas()
         {
-            if (e.KeyCode == Keys.Space)
+            navesEnemigas = new List<NaveEnemiga>();
+            for (int i = 0; i < 8; i++)
             {
-                // Crea la bala
-                bala = new PictureBox();
-                bala.Image = Properties.Resources.bala; // Asigna la imagen de la bala
-                bala.BackColor = System.Drawing.Color.Transparent;
-                bala.Size = new Size(10, 20);
-                bala.SizeMode = PictureBoxSizeMode.StretchImage;
-                // Establecer la posición inicial de la bala en la misma posición que la nave
-                bala.Location = new Point(nave.Location.X + nave.Width / 2 - bala.Width / 2, nave.Location.Y);
+                int x = 100 + i * 100;
+                int y = 50;
+                int width = 50;
+                int height = 50;
+                Image imagen = Properties.Resources.naveEnemiga1;
 
-                // Agregar el PictureBox al formulario
-                Controls.Add(bala);
+                NaveEnemiga naveEnemiga = new NaveEnemiga(x, y, width, height, imagen);
+                navesEnemigas.Add(naveEnemiga);
+                Controls.Add(naveEnemiga.PictureBox);
+            }
+        }
 
-                // Inicia la animación de la bala
-                timer.Tick += (sender, e) =>
-                {
-                    bala.Top -= velocidadBala; // Mueve la bala hacia arriba
+        private void Timer_Tick(object sender, EventArgs e)
+        {
 
-                    // Si la bala sale de la pantalla, se detiene y se elimina
-                    if (bala.Top + bala.Height < 0)
-                    {
-                        timer.Tick -= (EventHandler)sender;
-                        Controls.Remove(bala);
-                        bala.Dispose();
-                    }
-                };
+            foreach (var nave in navesEnemigas)
+            {
+                nave.Mover();
             }
         }
     }
