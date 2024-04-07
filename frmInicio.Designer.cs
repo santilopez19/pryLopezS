@@ -65,7 +65,7 @@
             timer1.Interval = 1000;
             timer1.Tick += Timer_Tick;
             // 
-            // Inicio
+            // frmInicio
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -75,10 +75,9 @@
             Controls.Add(pictureBox1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Name = "Inicio";
+            Name = "frmInicio";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Galaga";
-            Load += Inicio_Load;
             KeyDown += Form1_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);

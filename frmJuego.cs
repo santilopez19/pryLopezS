@@ -31,7 +31,7 @@ namespace pryLopezS
             //bala
 
             KeyPreview = true;
-            KeyDown += bala_KeyDown;
+            this.KeyDown += bala_KeyDown;
         }
         public void Form1_Load(object sender, EventArgs e)
         {
